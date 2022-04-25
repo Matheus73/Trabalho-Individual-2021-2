@@ -36,3 +36,17 @@ jobs:
       - name: Run the docker aplication
         working-directory: ./aplicacao
         run: docker-compose run biblioteca-pessoal bash -c "rails db:reset;rspec"
+
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Create a new docker network
+        working-directory: ./aplicacao
+        run: docker network create gces-network
+
+      - name: Run the docker aplication
+        working-directory: ./aplicacao
+        run: docker-compose run biblioteca-pessoal bash -c "gem install rubocop; rubocop -A --fail-level F"
