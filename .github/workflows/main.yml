@@ -30,4 +30,5 @@ jobs:
         run: docker network create gces-network
 
       - name: Run the docker aplication
+        working-directory: ./aplicacao
         run: docker-compose up -d
